@@ -1,2 +1,3 @@
-# curso-platzi-react-avanzado
-Repositorio con el código del Curso Avanzado de React de Platzi
+# Petgram
+
+Project developed in the advanced course of React on Platzi.

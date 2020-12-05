@@ -1,25 +1,41 @@
 import React from 'react'
 import { GlobalStyle } from './components/styles/GlobalStyle'
-import { ListOfCategories } from './components/ListOfCategories'
-import { ListOfPhotoCards } from './container/ListOfPhotoCards'
+import { Home } from './pages/Home'
 import { Logo } from './components/Logo'
-import { PhotoCardWithQuery } from './container/PhotoCardWithQuery'
+import { Router } from '@reach/router'
+import { Detail } from './pages/detail'
+import { NavBar } from './components/NavBar'
+import { NotRegisterUser } from './pages/NotRegisterUser'
+import { User } from './pages/User'
+import { Favs } from './pages/Favs'
 
+import Context from './Context'
 export default function () {
-  const urlParamas = new window.URLSearchParams(window.location.search)
-  const detailId = urlParamas.get('detail')
   return (
     <>
       <GlobalStyle />
       <Logo />
-      {detailId ? (
-        <PhotoCardWithQuery id={detailId} />
-      ) : (
-        <>
-          <ListOfCategories />
-          <ListOfPhotoCards />
-        </>
-      )}
+      <Router>
+        <Home path='/' />
+        <Home path='/pet/:id' />
+        <Detail path='/detail/:detailId' />
+      </Router>
+      <Context.Consumer>
+        {({ isAuth }) =>
+          isAuth ? (
+            <Router>
+              <User path='/user' />
+              <Favs path='/favs' />
+            </Router>
+          ) : (
+            <Router>
+              <NotRegisterUser path='/favs' />
+              <NotRegisterUser path='/user' />
+            </Router>
+          )
+        }
+      </Context.Consumer>
+      <NavBar />
     </>
   )
 }

@@ -25,7 +25,6 @@ const renderProp = ({ loading, error, data }) => {
   }
   if (!loading) {
     const { photo = {} } = data
-    console.log('[photoCardWithQuery]: ', photo)
     return <PhotoCard {...photo} />
   }
   return null

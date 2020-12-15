@@ -21,6 +21,7 @@ const client = new ApolloClient({
       window.sessionStorage.removeItem('token')
       window.location.href = '/'
     }
+    // return window.alert('Please sign in if you want to like photos')
   }
 })
 

@@ -15,11 +15,20 @@ const GET_FAVS = gql`
 `
 
 const renderProp = ({ loading, error, data }) => {
-  if (loading) return <p>Loading</p>
+  if (loading) {
+    return <p style={{ textAlign: 'center', paddingTop: '10px' }}>Loading</p>
+  }
   if (error) return <p>Error!</p>
   const { favs } = data
-
-  return <ListOfFavs favs={favs} />
+  if (favs.length !== 0) {
+    return <ListOfFavs favs={favs} />
+  } else {
+    return (
+      <p style={{ textAlign: 'center', paddingTop: '10px' }}>
+        You don't have favs yet
+      </p>
+    )
+  }
 }
 
 export const FavsWithQuery = () => {
